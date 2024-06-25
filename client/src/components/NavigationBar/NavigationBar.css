@@ -1,0 +1,8 @@
+.nav {
+    display: inline-flex;
+    flex-direction: row;
+    min-width: none;
+    gap: 1em;
+    justify-content: space-between;
+    align-items: center;
+}
