@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../models/Post');
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+const { verifyUser, getUser } = require('../utils/userJwt');
+
+dotenv.config();
 
 router.use(express.json());
 
@@ -50,10 +55,22 @@ router.post('/new', async (req, res) => {
     const { title, content} = req.body;
 
     if(!title || !content) {
-        return res.status(400).json({ message: 'Please enter all fields' });
+        return res.status(400);
     }
-    
-    const author = 'Anonymous';
+
+    const token = req.headers['authorization'].split(' ')[1];
+
+    console.log(token);
+
+    if(!token) {
+        return res.status(401);
+    }
+
+    if(!verifyUser(token)) {
+        return res.status(401);
+    }
+
+    const author = getUser(token).username || 'Anonymous';
 
     try {
         const newPost = new Post({
@@ -64,11 +81,11 @@ router.post('/new', async (req, res) => {
 
         await newPost.save();
 
-        res.status(201);
+        return res.status(201);
     }
     catch (err) {
-        res.status(500).json({ message: 'Server error' });
         console.log(err);
+        return res.status(500);
     }
 });
 

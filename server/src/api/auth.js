@@ -2,7 +2,11 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+const userJwt = require('../utils/userJwt');
 const User = require('../models/User');
+
+dotenv.config();
 
 router.use(express.json());
 
@@ -30,7 +34,7 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
-        const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: 3600 });
+        const token = userJwt.signUser(user);
 
         res.json({ token });
     }
@@ -60,7 +64,7 @@ router.post('/register', async (req, res) => {
 
         await newUser.save();
 
-        const token = jwt.sign({ id : newUser }, 'secret', { expiresIn: 3600 });
+        const token = userJwt.signUser(newUser);
 
         res.status(201).json({ token: token });
     }

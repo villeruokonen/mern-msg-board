@@ -4,7 +4,7 @@ export const useAuth = () => {
     const [auth, setAuth] = useState(false);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = window.localStorage.getItem('token');
         if(token) {
             setAuth(true);
         }

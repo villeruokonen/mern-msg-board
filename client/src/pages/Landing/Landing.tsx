@@ -6,6 +6,14 @@ import './Landing.css'
 const Landing : React.FC = () => {
 
     const [registerClicked, setRegisterClicked] = useState(false);
+
+    const onLogin = () => {
+        console.log("Logged in");
+    }
+
+    const onRegister = () => {
+        console.log("Registered");
+    }
     
     return (
         <>

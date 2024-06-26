@@ -7,6 +7,8 @@ const Login : React.FC = () => {
 
     const navigate = useNavigate();
 
+    const [error, setError] = React.useState<string | null>(null);
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const username = e.currentTarget.username.value;
@@ -15,16 +17,20 @@ const Login : React.FC = () => {
 
         if(!token) {
             console.error("Invalid login");
+            setError("Invalid login");
             return;
         }
 
+        window.localStorage.setItem("token", token);
         navigate("/dashboard");
+        console.log("Logged in");
     }
 
-    
-
     return (
-        <LoginForm onSubmit={handleSubmit} />
+        <>
+            <LoginForm onSubmit={handleSubmit} />
+            {error && <br/> && <span>{error}</span>}
+        </>
     );
 }
 
