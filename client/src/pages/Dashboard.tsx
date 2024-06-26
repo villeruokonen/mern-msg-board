@@ -17,8 +17,8 @@ const Dashboard : React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const title = "New post";
-        const content = e.currentTarget.content.value;
+        const title = e.currentTarget.postTitle.value;
+        const content = e.currentTarget.postContent.value;
 
         const result = await createPost(title, content);
         setEntries([...entries, result]);

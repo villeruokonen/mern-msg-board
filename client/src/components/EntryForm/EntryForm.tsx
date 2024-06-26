@@ -33,13 +33,13 @@ const EntryForm : React.FC<{onSubmit: (e: React.FormEvent<HTMLFormElement>) => v
     return (
         <form className="entry-form" onSubmit={onSubmit}>
             <label htmlFor="title">Title</label>
-            <input type="text" id="title" onChange={countTitleCharacters} />
+            <input type="text" id="postTitle" onChange={countTitleCharacters} />
             <small>{titleCharCount}/{maxTitleLength}</small>
 
             <br/>
 
             <label htmlFor="content">Content</label>
-            <textarea id="content" onChange={countCharacters}></textarea>
+            <textarea id="postContent" onChange={countCharacters}></textarea>
             <small>{contentCharCount}/{maxCharacters}</small>
 
             <br/>
