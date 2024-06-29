@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
 
-const db = mongoose.connect('mongodb://localhost:27017/mern-msg-board');
+const db = mongoose.connect(process.env.MONGODB_URI);
 
 module.exports = db;
