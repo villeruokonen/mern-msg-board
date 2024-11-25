@@ -9,9 +9,9 @@ const Footer: React.FC<FooterData> = (
     { description }: FooterData
 ) => {
     return (
-        <div className="app-footer">
+        <footer className="app-footer">
             <p>{description}</p>
-        </div>
+        </footer>
     );
 }
 
